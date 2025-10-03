@@ -1,52 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package empresasoft.Departamentos;
 
-import empresasoft.Composite.Composite;
 import empresasoft.developer.Developer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author laver
- */
-public class DepAdministradorHardware implements Composite {
+public class DepAdministradorHardware implements Departamento {
 
-    private final List<Composite> empleados = new ArrayList<>();
-    
-    public void agregarDeveloper(Developer dev, int cn){
-       
-        for(int i=0; i<cn; i++){
-            
-            empleados.add((Composite) dev.clonar());
-            
+    private final List<Developer> empleados = new ArrayList<>();
+
+    @Override
+    public void agregarDeveloper(Developer dev, int cn) {
+        for (int i = 0; i < cn; i++) {
+            empleados.add((Developer) dev.clonar());
         }
-
     }
-    
-    public void modificarDeveloper( String nuevoNombre, String nuevoRol) {
-    for(int i = 0; i< empleados.size(); i++){
-        Developer dev = (Developer) empleados.get(i);
-        
-        dev.setName(nuevoNombre);
-        dev.setTarea(nuevoRol);
-    }
-}
 
-    
-    
+    @Override
+    public void modificarDeveloper(String nuevoNombre, String nuevoRol) {
+        for (Developer dev : empleados) {
+            dev.setName(nuevoNombre);
+            dev.setTarea(nuevoRol);
+        }
+    }
+
     @Override
     public String getInfo() {
-        StringBuilder sb = new StringBuilder("Departamento de administracion de hardware: \n");
-    
-        for (Composite empleado : empleados) {
+        StringBuilder sb = new StringBuilder("Departamento Administracion de Hardware:\n");
+        for (Developer empleado : empleados) {
             sb.append(empleado.getInfo()).append("\n");
         }
-    
         return sb.toString();
     }
-    
 }
